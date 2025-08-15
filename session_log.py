@@ -1,9 +1,11 @@
+import uuid
 from timer import Timer
 import json
 
 class SessionLog:
     def add_session(self, session_date, protocol, added_weight, total_weight, difficulty, completed, notes):
         """Add a session to the session_log.json file"""
+        
         entry = {
             "Date": session_date.isoformat(),
             "Protocol": protocol,
@@ -11,8 +13,9 @@ class SessionLog:
             "Total Weight": total_weight,
             "Difficulty": difficulty,
             "Completed": completed,
-            "Notes": notes
-        }
+            "Notes": notes,
+            "ID": str(uuid.uuid4())
+        }   
 
         try:
             with open("session_log.json", "r") as f:
