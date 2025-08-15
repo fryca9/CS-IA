@@ -1,0 +1,110 @@
+[
+  {
+    "Date": "2025-08-14",
+    "Protocol": "Example Protocol",
+    "Added Weight": 32.0,
+    "Total Weight": 53.0,
+    "Difficulty": 3,
+    "Completed": false,
+    "Notes": "hello"
+  },
+  {
+    "Date": "2025-07-29",
+    "Protocol": "Another Protocol",
+    "Added Weight": 67.0,
+    "Total Weight": 130.0,
+    "Difficulty": 8,
+    "Completed": false,
+    "Notes": "nope"
+  },
+  {
+    "Date": "2025-08-01",
+    "Protocol": "Example Protocol",
+    "Added Weight": 25.0,
+    "Total Weight": 50.0,
+    "Difficulty": 5,
+    "Completed": true,
+    "Notes": "Good session"
+  },
+  {
+    "Date": "2025-08-03",
+    "Protocol": "Another Protocol",
+    "Added Weight": 40.0,
+    "Total Weight": 90.0,
+    "Difficulty": 6,
+    "Completed": false,
+    "Notes": "Felt tired"
+  },
+  {
+    "Date": "2025-08-05",
+    "Protocol": "Example Protocol",
+    "Added Weight": 30.0,
+    "Total Weight": 60.0,
+    "Difficulty": 4,
+    "Completed": true,
+    "Notes": "Improved form"
+  },
+  {
+    "Date": "2025-08-07",
+    "Protocol": "Another Protocol",
+    "Added Weight": 55.0,
+    "Total Weight": 110.0,
+    "Difficulty": 7,
+    "Completed": false,
+    "Notes": "Increase rest time"
+  },
+  {
+    "Date": "2025-08-09",
+    "Protocol": "Example Protocol",
+    "Added Weight": 20.0,
+    "Total Weight": 45.0,
+    "Difficulty": 2,
+    "Completed": true,
+    "Notes": "Easy day"
+  },
+  {
+    "Date": "2025-08-11",
+    "Protocol": "Another Protocol",
+    "Added Weight": 60.0,
+    "Total Weight": 120.0,
+    "Difficulty": 9,
+    "Completed": false,
+    "Notes": "Very challenging"
+  },
+  {
+    "Date": "2025-08-13",
+    "Protocol": "Example Protocol",
+    "Added Weight": 35.0,
+    "Total Weight": 70.0,
+    "Difficulty": 5,
+    "Completed": true,
+    "Notes": "Solid effort"
+  },
+  {
+    "Date": "2025-08-15",
+    "Protocol": "Another Protocol",
+    "Added Weight": 50.0,
+    "Total Weight": 100.0,
+    "Difficulty": 6,
+    "Completed": true,
+    "Notes": "Good progress"
+  },
+  {
+    "Date": "2025-08-17",
+    "Protocol": "Example Protocol",
+    "Added Weight": 28.0,
+    "Total Weight": 56.0,
+    "Difficulty": 4,
+    "Completed": false,
+    "Notes": "Need to focus"
+  },
+  {
+    "Date": "2025-08-19",
+    "Protocol": "Another Protocol",
+    "Added Weight": 65.0,
+    "Total Weight": 125.0,
+    "Difficulty": 8,
+    "Completed": true,
+    "Notes": "Best session yet"
+  }
+]

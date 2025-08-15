@@ -1,0 +1,20 @@
+[
+  {
+    "Protocol Name": "Example Protocol",
+    "Total Sets": 3,
+    "Reps Per Set": 5,
+    "Hang Time": 10,
+    "Rest Time": 5,
+    "Rest Between Sets": 15,
+    "Delay Start": 30
+  },
+  {
+    "Protocol Name": "Another Protocol",
+    "Total Sets": 4,
+    "Reps Per Set": 6,
+    "Hang Time": 12,
+    "Rest Time": 6,
+    "Rest Between Sets": 18,
+    "Delay Start": 36
+  }
+]
