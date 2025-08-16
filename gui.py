@@ -1,8 +1,7 @@
 import tkinter as tk
-from add_session import AddSession
-from view_sessions import ViewSessions
-import json
-
+from core.protocols.manage_protocols import ManageProtocols
+from core.sessions.view_sessions import ViewSessions
+from core.sessions.add_session import AddSession
 class GUI:
   def __init__(self):
     self.root = tk.Tk()
@@ -14,7 +13,7 @@ class GUI:
     self.buttonframe.columnconfigure(0, weight=1)
     self.buttonframe.columnconfigure(1, weight=1)
 
-    self.protocol_btn = tk.Button(self.buttonframe, text="Protocol", command=lambda: print("Protocol button clicked"))
+    self.protocol_btn = tk.Button(self.buttonframe, text="Protocol", command=lambda: ManageProtocols(self.root))
     self.protocol_btn.grid(row=0, column=0, sticky="ew")
 
     self.session_log_btn = tk.Button(self.buttonframe, text="Session Log", command=lambda: ViewSessions(self.root))

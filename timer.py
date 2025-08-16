@@ -1,4 +1,3 @@
-from protocol import Protocol
 import time
 
 class Timer:

@@ -1,12 +1,10 @@
 import tkinter as tk
 from tkinter import messagebox
 import tkinter.ttk as ttk
-import pandas as pd
-import json
 from tkcalendar import DateEntry
-from helper_functions import HelperFunctions as Helper
+from core.helper_methods import HelperMethods as Helper
 
-class Filters:
+class FilterSessions:
     def __init__(self, root, df, tree, update_tree_callback):
         self.tree = tree
         self.df_original = df.copy()
@@ -38,8 +36,7 @@ class Filters:
 
         # --- Protocol ---
         tk.Label(filters_field, text="Protocol:", anchor="w", width=16).grid(row=3, column=0, pady=5, sticky="ew")
-        with open("protocol_manager.json", "r") as f:
-            protocols = json.load(f)
+        protocols = self.data_manager.load_protocols()
         protocol_names = ["All"] + [p["Protocol Name"] for p in protocols]
         self.protocol_var = tk.StringVar(value="All")
         tk.OptionMenu(filters_field, self.protocol_var, *protocol_names).grid(row=3, columnspan=2, column=1, sticky="ew")
@@ -51,24 +48,33 @@ class Filters:
 
         # --- Difficulty ---
         tk.Label(filters_field, text="RPI (difficulty):", anchor="w", width=16).grid(row=5, column=0, pady=5, sticky="ew")
-        self.difficulty_entry = tk.Entry(filters_field)
-        self.difficulty_entry.grid(row=5, column=1, padx=(0, 5), sticky="ew")
-        self.difficulty_var = tk.StringVar(value="Above")
-        ttk.OptionMenu(filters_field, self.difficulty_var, "Above", "Above", "Below").grid(row=5, column=2, padx=(5, 0), sticky="ew")
+        self.difficulty_var = tk.IntVar(value=1)
+        difficulty_spinbox = tk.Spinbox(
+            filters_field, from_=1, to=10, textvariable=self.difficulty_var
+        )
+        difficulty_spinbox.grid(row=5, column=1, padx=(0, 5), sticky="ew")
+        self.difficulty_opt = tk.StringVar(value="Above")
+        ttk.OptionMenu(filters_field, self.difficulty_opt, "Above", "Above", "Below").grid(row=5, column=2, padx=(5, 0), sticky="ew")
 
         # --- Added weight ---
         tk.Label(filters_field, text="Added Weight:", anchor="w", width=16).grid(row=6, column=0, pady=5, sticky="ew")
-        self.added_weight_entry = tk.Entry(filters_field)
-        self.added_weight_entry.grid(row=6, column=1, padx=(0, 5), sticky="ew")
-        self.added_weight_var = tk.StringVar(value="Above")
-        ttk.OptionMenu(filters_field, self.added_weight_var, "Above", "Above", "Below").grid(row=6, column=2, padx=(5, 0), sticky="ew")
+        self.added_weight_var = tk.DoubleVar(value=0.00)
+        self.added_weight_spinbox = tk.Spinbox(
+            filters_field, from_=0.00, to=1000.00, increment=0.50, textvariable=self.added_weight_var, format="%.2f"
+        )
+        self.added_weight_spinbox.grid(row=6, column=1, padx=(0, 5), sticky="ew")
+        self.added_weight_opt = tk.StringVar(value="Above")
+        ttk.OptionMenu(filters_field, self.added_weight_opt, "Above", "Above", "Below").grid(row=6, column=2, padx=(5, 0), sticky="ew")
 
         # --- Total weight ---
         tk.Label(filters_field, text="Total Weight:", anchor="w", width=16).grid(row=7, column=0, pady=5, sticky="ew")
-        self.total_weight_entry = tk.Entry(filters_field)
-        self.total_weight_entry.grid(row=7, column=1, padx=(0, 5), sticky="ew")
-        self.total_weight_var = tk.StringVar(value="Above")
-        ttk.OptionMenu(filters_field, self.total_weight_var, "Above", "Above", "Below").grid(row=7, column=2, padx=(5, 0), sticky="ew")
+        self.total_weight_var = tk.DoubleVar(value=0.00)
+        self.total_weight_spinbox = tk.Spinbox(
+            filters_field, from_=0.00, to=1000.00, increment=0.50, textvariable=self.total_weight_var, format="%.2f"
+        )
+        self.total_weight_spinbox.grid(row=7, column=1, padx=(0, 5), sticky="ew")
+        self.total_weight_opt = tk.StringVar(value="Above")
+        ttk.OptionMenu(filters_field, self.total_weight_opt, "Above", "Above", "Below").grid(row=7, column=2, padx=(5, 0), sticky="ew")
 
         # --- Buttons ---
         buttons_field = tk.Frame(self.filter_sessions_window)
@@ -85,10 +91,9 @@ class Filters:
     def apply_filters(self):
         errors = []
 
-        start_date = Helper.get_date(self.start_date_entry, errors)
-        end_date = Helper.get_date(self.end_date_entry, errors)
+        start_date = self.start_date_entry.get_date()
+        end_date = self.end_date_entry.get_date()
         protocol = self.protocol_var.get()
-
         completed_val = self.completed_filter_var.get()
         completed = None
         if completed_val == "Completed":
@@ -96,14 +101,12 @@ class Filters:
         elif completed_val == "Not Completed":
             completed = False
 
-        difficulty = Helper.get_int(self.difficulty_entry, "Difficulty", errors)
-        difficulty_filter = self.difficulty_var.get()
-
-        added_weight = Helper.get_float(self.added_weight_entry, "Added weight", errors)
-        added_weight_filter = self.added_weight_var.get()
-
-        total_weight = Helper.get_float(self.total_weight_entry, "Total weight", errors)
-        total_weight_filter = self.total_weight_var.get()
+        difficulty = Helper.get_int(self.difficulty_var, "Difficulty", errors)
+        difficulty_filter = self.difficulty_opt.get()
+        added_weight = Helper.get_float(self.added_weight_var, "Added weight", errors)
+        added_weight_filter = self.added_weight_opt.get()
+        total_weight = Helper.get_float(self.total_weight_var, "Total weight", errors)
+        total_weight_filter = self.total_weight_opt.get()
 
         if errors:
             messagebox.showerror("Invalid Input", "\n".join([f"• {e}" for e in errors]), icon="error")
@@ -140,9 +143,9 @@ class Filters:
         self.end_date_entry.set_date(self.df_original["Date"].max())
         self.protocol_var.set("All")
         self.completed_filter_var.set("All")
-        self.difficulty_entry.delete(0, tk.END)
-        self.difficulty_var.set("Above")
-        self.added_weight_entry.delete(0, tk.END)
-        self.added_weight_var.set("Above")
-        self.total_weight_entry.delete(0, tk.END)
-        self.total_weight_var.set("Above")
+        self.difficulty_var.set(1)
+        self.difficulty_opt.set("Above")
+        self.added_weight_var.set(0.0) # find a way to display "0.00"
+        self.added_weight_opt.set("Above")
+        self.total_weight_var.set(0.0) # find a way to display "0.00"
+        self.total_weight_opt.set("Above")
