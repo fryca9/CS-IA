@@ -10,11 +10,12 @@ class SessionForm:
     - initial: dict with keys Date, Protocol, Added Weight, Total Weight, Difficulty, Completed, Notes
     - on_save: callback(values_dict) called when validation passes. Return True if saved, else False/raise.
     """
-      def __init__(self, root, title, initial_data=None, on_save=None):
+      def __init__(self, root, title, initial_data=None, on_save=None, protocol_name=None):
         self.root = root
         self.on_save = on_save
         self.initial_data = initial_data or {}
         self.data_manager = DataManager()
+        self.protocol_name = protocol_name
 
         self.window = tk.Toplevel(root)
         self.window.title(title)
@@ -42,6 +43,8 @@ class SessionForm:
                 row=1, column=0, pady=5, sticky="w"
             )
             self.protocol_var = tk.StringVar(value=protocol_names[0] if protocol_names else "")
+            if self.protocol_name:
+                self.protocol_var.set(self.protocol_name)
             protocol_menu = tk.OptionMenu(entries_field, self.protocol_var, *protocol_names)
             protocol_menu.grid(row=1, column=1, pady=5, padx=(10, 0), sticky="ew")
 

@@ -100,6 +100,14 @@ class DataManager:
         protocols = self.load_protocols()
         protocols = [p for p in protocols if p.get("ID") not in set(ids)]
         self.save_protocols(protocols)
+        
+    def get_protocol(self, protocol_name):
+        """Get a protocol by its name."""
+        protocols = self.load_protocols()
+        for protocol in protocols:
+            if protocol.get("Protocol Name") == protocol_name:
+                return protocol
+        return None
 
     @staticmethod
     def _json_default(o):

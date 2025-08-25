@@ -2,6 +2,8 @@ import tkinter as tk
 from core.protocols.manage_protocols import ManageProtocols
 from core.sessions.view_sessions import ViewSessions
 from core.sessions.add_session import AddSession
+from core.timer.select_protocol import SelectProtocol
+from core.timer.timer_ui import TimerUI
 class GUI:
   def __init__(self):
     self.root = tk.Tk()
@@ -21,9 +23,10 @@ class GUI:
 
     self.add_session_btn = tk.Button(self.buttonframe, text="Add Session", command=lambda: AddSession(self.root))
     self.add_session_btn.grid(row=1, column=0, columnspan=2, sticky="ew")
-
+    self.timer_btn = tk.Button(self.buttonframe, text="Timer", command=lambda: SelectProtocol(self.root))
+    self.timer_btn.grid(row=2, column=0, columnspan=2, pady=10)
     self.buttonframe.pack(pady=20)
-  
+
     self.root.mainloop()
   
   

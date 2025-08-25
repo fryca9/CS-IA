@@ -2,10 +2,10 @@ from core.sessions.session_form import SessionForm
 from core.data_manager import DataManager
 
 class AddSession:
-    def __init__(self, root, update_callback=None):
+    def __init__(self, root, update_callback=None, protocol_name=None):
         self.data_manager = DataManager()
         self.update_callback = update_callback
-        SessionForm(root, title="Add Session", initial_data=None, on_save=self._on_save)
+        SessionForm(root, title="Add Session", initial_data=None, on_save=self._on_save, protocol_name=protocol_name)
 
     def _on_save(self, values):
         # values is a dict; data_manager handles IDs

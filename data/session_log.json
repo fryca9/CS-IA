@@ -30,16 +30,6 @@
     "ID": "d4e5f6g7-8910-1112-1314-151617181920"
   },
   {
-    "Date": "2025-08-21",
-    "Protocol": "Example Protocol",
-    "Added Weight": 4.0,
-    "Total Weight": 79.5,
-    "Difficulty": 2,
-    "Completed": true,
-    "Notes": "easy day",
-    "ID": "f6g7h8i9-1011-1213-1415-161718192021"
-  },
-  {
     "Date": "2025-08-22",
     "Protocol": "Another Protocol",
     "Added Weight": 6.5,

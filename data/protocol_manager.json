@@ -20,5 +20,16 @@
     "Delay Start": 2,
     "Notes": "youp",
     "ID": "1806f6ea-dc84-4972-8a90-90963e76d27b"
+  },
+  {
+    "Protocol Name": "you",
+    "Total Sets": 3,
+    "Reps Per Set": 4,
+    "Hang Time": 5,
+    "Rest Time": 3,
+    "Rest Between Sets": 4,
+    "Delay Start": 5,
+    "Notes": "",
+    "ID": "6ed117cd-02a7-470e-a819-59d04f608126"
   }
 ]
